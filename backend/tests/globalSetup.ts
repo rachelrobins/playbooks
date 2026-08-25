@@ -1,6 +1,8 @@
 import { execSync } from 'child_process';
 import path from 'path';
 
+// Jest globalSetup: runs once before any test file, pushing the Prisma
+// schema to a dedicated test.db (force-reset) so the suite starts clean.
 export default function globalSetup() {
   const testDbPath = path.join(__dirname, '..', 'test.db');
 

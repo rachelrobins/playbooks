@@ -4,6 +4,7 @@ import { Action, Trigger } from '../../common/domain';
 import { CreatePlaybookInput } from './playbooks.schemas';
 import { PlaybookDto } from './playbooks.types';
 
+// Converts the database representation into the API response format.
 function toDto(playbook: {
   id: string;
   name: string;

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { ACTIONS, MAX_ACTIONS, MIN_ACTIONS, TRIGGERS } from '../../common/domain';
 
+// Validates and constrains the input used to create a playbook.
 export const createPlaybookSchema = z.object({
   name: z.string().trim().min(1, 'Name is required').max(100, 'Name is too long'),
   trigger: z.enum(TRIGGERS, {
@@ -19,4 +20,5 @@ export const createPlaybookSchema = z.object({
     }),
 });
 
+// Derives the TypeScript input type directly from the Zod schema.
 export type CreatePlaybookInput = z.infer<typeof createPlaybookSchema>;

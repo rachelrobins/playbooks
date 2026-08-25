@@ -100,6 +100,32 @@ credentials, validation errors), playbook CRUD (incl. ownership isolation
 between users, action-count/enum validation), and trigger simulation
 (matching, no-match, invalid trigger, auth requirement).
 
+## Troubleshooting
+
+**Register/Login fails with "Something went wrong. Please try again.",
+and the browser console shows a CORS error like:**
+
+```
+Access to fetch at 'http://localhost:4000/auth/register' from origin
+'http://localhost:5174' has been blocked by CORS policy: Response to
+preflight request doesn't pass access control check: The
+'Access-Control-Allow-Origin' header has a value 'http://localhost:5173'
+that is not equal to the supplied origin.
+```
+
+This means Vite couldn't bind to `5173` (usually because another process,
+often a leftover dev server, is already using it) and started the frontend
+on `5174` (or another port) instead, while the backend's `CORS_ORIGIN` is
+still set to `5173`. Fix by either:
+
+- Stopping whatever is using port `5173`, then restarting `npm run dev` in
+  `frontend/` so it binds to `5173` again, **or**
+- Updating `CORS_ORIGIN` in `backend/.env` to match the port the frontend
+  actually printed on startup, then restarting the backend.
+
+Check the terminal output of `npm run dev` in `frontend/` to confirm which
+port it's actually running on — Vite prints it on startup.
+
 ## Design notes / trade-offs
 
 - **SQLite via Prisma**: zero external services to stand up for a take-home;

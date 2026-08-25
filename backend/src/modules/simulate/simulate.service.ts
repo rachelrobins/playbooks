@@ -12,6 +12,7 @@ export interface SimulationResult {
   matchedPlaybooks: MatchedPlaybook[];
 }
 
+/** Finds the user's playbooks that would be triggered by the given trigger. */
 export async function simulateTrigger(userId: string, trigger: Trigger): Promise<SimulationResult> {
   const playbooks = await playbooksService.listPlaybooks(userId);
   const matchedPlaybooks = playbooks

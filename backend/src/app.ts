@@ -10,7 +10,7 @@ import { simulateRouter } from './modules/simulate/simulate.routes';
 export function createApp() {
   const app = express();
 
-  app.use(cors({ origin: env.corsOrigin }));
+  app.use(cors({ origin: env.corsOrigin }));  // Allow browser requests only from the configured frontend origin.
   app.use(express.json());
 
   app.get('/health', (_req, res) => res.status(200).json({ status: 'ok' }));

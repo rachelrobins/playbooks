@@ -1,3 +1,5 @@
+// Integration tests for POST /simulateTrigger: given a trigger, it should
+// return the requesting user's playbooks whose trigger matches.
 import request from 'supertest';
 import { app, registerAndLogin, resetDatabase } from './testUtils';
 import { prisma } from '../src/config/prisma';

@@ -6,6 +6,7 @@ export interface AuthenticatedRequest extends Request {
   user?: { userId: string; email: string };
 }
 
+/** Validates the Bearer token and attaches the authenticated user to the request. */
 export function authGuard(req: AuthenticatedRequest, _res: Response, next: NextFunction) {
   const header = req.headers.authorization;
   if (!header?.startsWith('Bearer ')) {

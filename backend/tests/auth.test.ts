@@ -1,3 +1,5 @@
+// Integration tests for POST /auth/register and POST /auth/login,
+// exercised end-to-end through the Express app (no mocking).
 import request from 'supertest';
 import { app, resetDatabase } from './testUtils';
 import { prisma } from '../src/config/prisma';

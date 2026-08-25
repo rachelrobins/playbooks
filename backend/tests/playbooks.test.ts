@@ -1,3 +1,5 @@
+// Integration tests for the /playbooks CRUD routes: auth requirement,
+// input validation, and per-user ownership isolation.
 import request from 'supertest';
 import { app, registerAndLogin, resetDatabase } from './testUtils';
 import { prisma } from '../src/config/prisma';
