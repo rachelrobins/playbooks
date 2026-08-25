@@ -1,0 +1,194 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f5f6fa;
+  color: #1f2430;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: #1f2430;
+  color: white;
+}
+
+.navbar__links a {
+  color: white;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+.navbar__links a.active {
+  text-decoration: underline;
+}
+
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.page {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.auth-page {
+  max-width: 360px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.auth-tabs {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 0.5rem;
+  background: #e5e7eb;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-tabs button.active {
+  background: #1f2430;
+  color: white;
+}
+
+.auth-form,
+.playbook-form,
+.simulate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.auth-form label,
+.playbook-form label,
+.simulate-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: 600;
+}
+
+input,
+select,
+button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  cursor: pointer;
+  background: #1f2430;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.password-input {
+  position: relative;
+  display: flex;
+}
+
+.password-input input {
+  flex: 1;
+  padding-right: 2.25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.password-input__toggle {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-input__toggle:hover {
+  color: #1f2430;
+}
+
+.action-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.action-checkbox-group label {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+}
+
+.action-checkbox-group label.disabled {
+  opacity: 0.5;
+}
+
+.error-banner {
+  background: #fde8e8;
+  color: #9b1c1c;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+}
+
+.playbook-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.playbook-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.playbook-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playbook-card__delete {
+  background: #9b1c1c;
+}
+
+.simulation-results {
+  margin-top: 2rem;
+}
+
+.simulation-results__item {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}

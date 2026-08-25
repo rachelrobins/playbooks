@@ -1,0 +1,22 @@
+import { z } from 'zod';
+import { ACTIONS, MAX_ACTIONS, MIN_ACTIONS, TRIGGERS } from '../../common/domain';
+
+export const createPlaybookSchema = z.object({
+  name: z.string().trim().min(1, 'Name is required').max(100, 'Name is too long'),
+  trigger: z.enum(TRIGGERS, {
+    errorMap: () => ({ message: `Trigger must be one of: ${TRIGGERS.join(', ')}` }),
+  }),
+  actions: z
+    .array(
+      z.enum(ACTIONS, {
+        errorMap: () => ({ message: `Actions must be one of: ${ACTIONS.join(', ')}` }),
+      }),
+    )
+    .min(MIN_ACTIONS, `At least ${MIN_ACTIONS} action is required`)
+    .max(MAX_ACTIONS, `At most ${MAX_ACTIONS} actions are allowed`)
+    .refine((actions) => new Set(actions).size === actions.length, {
+      message: 'Actions must be unique',
+    }),
+});
+
+export type CreatePlaybookInput = z.infer<typeof createPlaybookSchema>;

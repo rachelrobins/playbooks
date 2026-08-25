@@ -1,0 +1,27 @@
+import cors from 'cors';
+import express from 'express';
+import { env } from './config/env';
+import { errorHandler } from './middleware/errorHandler';
+import { authRouter } from './modules/auth/auth.routes';
+import { metaRouter } from './modules/meta/meta.routes';
+import { playbooksRouter } from './modules/playbooks/playbooks.routes';
+import { simulateRouter } from './modules/simulate/simulate.routes';
+
+export function createApp() {
+  const app = express();
+
+  app.use(cors({ origin: env.corsOrigin }));
+  app.use(express.json());
+
+  app.get('/health', (_req, res) => res.status(200).json({ status: 'ok' }));
+
+  app.use('/auth', authRouter);
+  app.use('/playbooks', playbooksRouter);
+  app.use('/simulateTrigger', simulateRouter);
+  app.use('/meta', metaRouter);
+
+  app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
+  app.use(errorHandler);
+
+  return app;
+}
