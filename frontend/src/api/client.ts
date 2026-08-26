@@ -5,14 +5,33 @@ const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
 // "Loading…"/"submitting" forever with no way for the user to recover.
 const REQUEST_TIMEOUT_MS = 10000;
 
+// API error contract (see backend/src/middleware/errorHandler.ts): every non-2xx
+// response body is { error: string, code?: string }. `code` is a stable machine-readable
+// identifier (e.g. "UNAUTHORIZED", "NOT_FOUND"); `error` is a human-readable message safe
+// to show directly to the user. Client code should read these fields, not guess at shape.
+interface ApiErrorBody {
+  error?: string;
+  code?: string;
+}
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
     message: string,
+    public readonly code?: string,
   ) {
     super(message);
     this.name = 'ApiError';
   }
+}
+
+// Called whenever an authenticated request comes back 401, i.e. the session's token was
+// rejected (expired/invalid) — not on a login/register attempt, which sends no token.
+// AuthContext registers this to log the user out and let route guards redirect to /login.
+let onUnauthorized: (() => void) | null = null;
+
+export function setUnauthorizedHandler(handler: (() => void) | null) {
+  onUnauthorized = handler;
 }
 
 interface RequestOptions {
@@ -56,11 +75,14 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
     return undefined as T;
   }
 
-  const data = await response.json().catch(() => ({}));
+  const data: ApiErrorBody = await response.json().catch(() => ({}));
 
   // Convert non-2xx responses into a consistent application error.
   if (!response.ok) {
-    throw new ApiError(response.status, data.error ?? 'Something went wrong');
+    if (response.status === 401 && token) {
+      onUnauthorized?.();
+    }
+    throw new ApiError(response.status, data.error ?? 'Something went wrong', data.code);
   }
 
   return data as T;

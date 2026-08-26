@@ -49,6 +49,16 @@ components (`PlaybookCard`, `TriggerSelect`, `ActionCheckboxGroup`).
 
 Authenticated routes expect `Authorization: Bearer <token>`.
 
+**Error contract**: every non-2xx response body is `{ error: string, code?: string }`.
+`error` is a human-readable message safe to show directly to the user; `code` is a stable
+machine-readable identifier (`UNAUTHORIZED`, `NOT_FOUND`, `CONFLICT`, `VALIDATION_ERROR`,
+`INTERNAL_ERROR`) for client code that needs to branch on the error type instead of
+string-matching `error`. On the frontend, `apiRequest` (`frontend/src/api/client.ts`)
+throws a matching `ApiError { status, message, code }` for every failure — including
+network errors and client-side timeouts (`status: 0`) — so callers always deal with one
+error type. A `401` on an authenticated request also triggers an automatic logout,
+redirecting to `/login` via the existing route guard.
+
 ## Prerequisites
 
 Install Node.js 18+ (LTS) before continuing: https://nodejs.org

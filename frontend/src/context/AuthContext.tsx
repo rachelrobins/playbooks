@@ -2,8 +2,9 @@
  * Provides application-wide authentication state, including login, registration,
  * logout, and persistence of the authenticated user in localStorage.
  */
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import * as authApi from '../api/auth';
+import { setUnauthorizedHandler } from '../api/client';
 import { AuthUser } from '../types/domain';
 
 // XSS-exposed by design choice; see "JWT stored in localStorage" in README.md's design notes.
@@ -44,6 +45,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuth(next);
   };
 
+  const logout = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    setAuth(null);
+  };
+
+  // Log the user out whenever an authenticated request comes back 401 (expired/invalid
+  // token) so route guards redirect to /login instead of leaving them stuck on stale data.
+  useEffect(() => {
+    setUnauthorizedHandler(logout);
+    return () => setUnauthorizedHandler(null);
+  }, []);
+
   const value = useMemo<AuthContextValue>(
     () => ({
       token: auth?.token ?? null,
@@ -56,10 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const result = await authApi.login(email, password);
         persist(result);
       },
-      logout: () => {
-        localStorage.removeItem(STORAGE_KEY);
-        setAuth(null);
-      },
+      logout,
     }),
     [auth],
   );
