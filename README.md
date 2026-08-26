@@ -77,12 +77,10 @@ npm run dev                           # starts on http://localhost:4000
 
 You don't need to edit `backend/.env` for local dev — the defaults just work:
 - `DATABASE_URL` points at a local SQLite file that Prisma creates for you.
-- `JWT_SECRET` ships as a placeholder in `.env.example`, which is fine to use
-  as-is locally — but replace it with a real random value before deploying
-  anywhere reachable by other people (it's what stops someone from forging
-  login tokens). There's no fallback in code: the app refuses to start if
-  `JWT_SECRET` isn't set at all, in any environment, so a deployment can't
-  silently end up using a known/guessable secret.
+- `JWT_SECRET` is a placeholder in `.env.example` so the app can be run
+  immediately for local evaluation. It must be replaced with a
+  cryptographically random secret before deployment or any shared/non-local
+  environment.
 - `PORT` / `CORS_ORIGIN` only need changing if `4000` is taken or you run
   the frontend on a port other than `5173`.
 
@@ -112,6 +110,14 @@ Backend tests cover: registration/login (incl. duplicate email, bad
 credentials, validation errors), playbook CRUD (incl. ownership isolation
 between users, action-count/enum validation), and trigger simulation
 (matching, no-match, invalid trigger, auth requirement).
+
+Frontend tests cover: the `apiRequest` client (success/error parsing, network
+failures, request timeouts, and that the 401→logout handler fires only for
+authenticated requests), `AuthContext` (restoring a persisted session,
+auto-logout + storage clearing on a 401), the register form's password
+strength gating (weak passwords block submit and show a warning; login mode
+is unaffected), and presentational components (`ActionCheckboxGroup`,
+`PlaybookCard`).
 
 ## Troubleshooting
 
