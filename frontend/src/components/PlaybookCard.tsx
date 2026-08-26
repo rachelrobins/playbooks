@@ -5,6 +5,7 @@ interface PlaybookCardProps {
   onDelete: (id: string) => void;
 }
 
+/** Renders a card displaying information about a playbook and provides a delete option. */
 export function PlaybookCard({ playbook, onDelete }: PlaybookCardProps) {
   return (
     <div className="playbook-card">

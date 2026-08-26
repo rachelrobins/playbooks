@@ -7,6 +7,7 @@ import { SimulationResult, Trigger } from '../types/domain';
 import { ErrorBanner } from '../components/ErrorBanner';
 import { TriggerSelect } from '../components/TriggerSelect';
 
+// Renders the page for simulating an event trigger.
 export function SimulateEventPage() {
   const { token } = useAuth();
 
@@ -23,6 +24,7 @@ export function SimulateEventPage() {
       .catch(() => setError('Failed to load triggers.'));
   }, []);
 
+  // Handle form submission to simulate the selected trigger.
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!token || !trigger) return;

@@ -6,6 +6,7 @@ import { LoginPage } from './pages/LoginPage';
 import { CreatePlaybookPage } from './pages/CreatePlaybookPage';
 import { SimulateEventPage } from './pages/SimulateEventPage';
 
+// The main App component that sets up routing and authentication context for the application.
 export function App() {
   return (
     <AuthProvider>

@@ -11,6 +11,7 @@ import { ActionCheckboxGroup } from '../components/ActionCheckboxGroup';
 
 const MAX_ACTIONS = 3;
 
+/** Renders the page for creating a new playbook. */
 export function CreatePlaybookPage() {
   const { token } = useAuth();
 
@@ -29,6 +30,7 @@ export function CreatePlaybookPage() {
   useEffect(() => {
     if (!token) return;
 
+    // Load triggers, available actions, and existing playbooks from the API.
     async function load() {
       try {
         const [meta, existing] = await Promise.all([metaApi.getMeta(), playbooksApi.listPlaybooks(token!)]);
@@ -45,6 +47,7 @@ export function CreatePlaybookPage() {
     load();
   }, [token]);
 
+  // Handle form submission to create a new playbook.
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!token || !trigger) return;
@@ -65,6 +68,7 @@ export function CreatePlaybookPage() {
     }
   }
 
+  // Handle deletion of a playbook.
   async function handleDelete(id: string) {
     if (!token) return;
     setError(null);

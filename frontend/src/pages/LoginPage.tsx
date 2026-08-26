@@ -7,6 +7,7 @@ import { PasswordInput } from '../components/PasswordInput';
 
 type Mode = 'login' | 'register';
 
+// Renders the login/register page for the application. If the user is already logged in, they are redirected to the create playbook page.
 export function LoginPage() {
   const { token, login, register } = useAuth();
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export function LoginPage() {
     return <Navigate to="/playbooks/new" replace />;
   }
 
+  // Handle form submission for login or registration.
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);

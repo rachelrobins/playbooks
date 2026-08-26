@@ -7,7 +7,10 @@ interface ActionCheckboxGroupProps {
   onChange: (selected: Action[]) => void;
 }
 
+/** Renders a group of action checkboxes with a configurable selection limit. */
 export function ActionCheckboxGroup({ actions, selected, maxSelected, onChange }: ActionCheckboxGroupProps) {
+
+  // Toggles an action while preventing the selection from exceeding the maximum.
   function toggle(action: Action) {
     if (selected.includes(action)) {
       onChange(selected.filter((a) => a !== action));

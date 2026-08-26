@@ -11,6 +11,7 @@ const playbook: Playbook = {
   createdAt: new Date().toISOString(),
 };
 
+// Verifies playbook details are rendered and deletion is triggered with the correct ID.
 describe('PlaybookCard', () => {
   it('renders the playbook name, trigger, and actions', () => {
     render(<PlaybookCard playbook={playbook} onDelete={vi.fn()} />);

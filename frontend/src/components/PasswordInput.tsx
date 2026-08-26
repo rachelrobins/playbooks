@@ -2,6 +2,8 @@ import { InputHTMLAttributes, useState } from 'react';
 
 type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>;
 
+
+/** Renders a password input field with a toggle to show/hide the password. */
 export function PasswordInput({ className, ...inputProps }: PasswordInputProps) {
   const [visible, setVisible] = useState(false);
 

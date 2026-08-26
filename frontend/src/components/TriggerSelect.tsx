@@ -6,6 +6,7 @@ interface TriggerSelectProps {
   onChange: (trigger: Trigger) => void;
 }
 
+/** Renders a dropdown select element for choosing a trigger. */
 export function TriggerSelect({ triggers, value, onChange }: TriggerSelectProps) {
   return (
     <select value={value} onChange={(event) => onChange(event.target.value as Trigger)} required>

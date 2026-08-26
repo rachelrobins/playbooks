@@ -1,3 +1,7 @@
+/**
+ * Provides application-wide authentication state, including login, registration,
+ * logout, and persistence of the authenticated user in localStorage.
+ */
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import * as authApi from '../api/auth';
 import { AuthUser } from '../types/domain';
@@ -19,6 +23,7 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+/** Restores the previously stored authentication state, if available. */
 function loadStoredAuth(): StoredAuth | null {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return null;
@@ -29,6 +34,7 @@ function loadStoredAuth(): StoredAuth | null {
   }
 }
 
+/** Provides authentication state and actions to components throughout the application. */
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [auth, setAuth] = useState<StoredAuth | null>(() => loadStoredAuth());
 
@@ -60,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+/** Provides access to authentication state and actions from child components. */
 export function useAuth(): AuthContextValue {
   const context = useContext(AuthContext);
   if (!context) {

@@ -4,6 +4,7 @@ import { ActionCheckboxGroup } from './ActionCheckboxGroup';
 
 const ACTIONS = ['Isolate Host', 'Notify Admin', 'Block IP'] as const;
 
+// Verifies action selection, removal, and maximum selection behavior.
 describe('ActionCheckboxGroup', () => {
   it('calls onChange when an unselected action is checked', () => {
     const onChange = vi.fn();

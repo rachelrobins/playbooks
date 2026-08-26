@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+/** Renders a navigation bar with links and user information. */
 export function Navbar() {
   const { user, logout } = useAuth();
 

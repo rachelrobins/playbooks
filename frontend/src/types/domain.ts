@@ -1,3 +1,8 @@
+/**
+ * Defines the shared domain types used across the frontend, including playbooks,
+ * authentication users, supported triggers/actions, and simulation results.
+ */
+
 export type Trigger = 'Malware Detected' | 'Login Attempt' | 'Phishing Alert';
 export type Action = 'Isolate Host' | 'Notify Admin' | 'Block IP';
 
