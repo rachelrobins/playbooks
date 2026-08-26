@@ -26,6 +26,8 @@ describe('AuthContext', () => {
     vi.unstubAllGlobals();
   });
 
+  // Checks that a previously logged-in user stays logged in across a page
+  // reload, since AuthProvider seeds its state from localStorage on mount.
   it('restores a persisted session from localStorage on mount', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ token: 'abc', user: { id: '1', email: 'a@b.com' } }));
 
@@ -38,6 +40,9 @@ describe('AuthContext', () => {
     expect(screen.getByTestId('token').textContent).toBe('abc');
   });
 
+  // Checks the end-to-end wiring behind AuthContext's registration with client.ts:
+  // a real apiRequest call through a mocked fetch that 401s must clear both React
+  // state and localStorage, not just one of the two.
   it('logs the user out (and clears storage) when an authenticated request comes back 401', async () => {
     localStorage.setItem(
       STORAGE_KEY,

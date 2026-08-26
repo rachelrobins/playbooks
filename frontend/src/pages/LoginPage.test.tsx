@@ -24,6 +24,8 @@ function renderLoginPage() {
 // passwords keep the submit button disabled and show a warning, strong ones don't,
 // and login mode isn't gated at all (existing users shouldn't be re-judged on login).
 describe('LoginPage password strength gating', () => {
+  // Checks that a password passing the letter+number+length rules but scoring
+  // low on zxcvbn (e.g. "12345678A") still blocks registration, with a visible warning.
   it('disables submit and warns for a weak-but-well-formed register password', () => {
     renderLoginPage();
     fireEvent.click(screen.getByRole('button', { name: 'Register' }));
@@ -35,6 +37,8 @@ describe('LoginPage password strength gating', () => {
     expect(screen.getByText(/not be easily guessable/)).toHaveClass('field-hint--warning');
   });
 
+  // Checks the counterpart: a genuinely strong password isn't blocked, so the
+  // gating only rejects weak passwords rather than being overly restrictive.
   it('enables submit for a strong register password', () => {
     renderLoginPage();
     fireEvent.click(screen.getByRole('button', { name: 'Register' }));
@@ -46,9 +50,10 @@ describe('LoginPage password strength gating', () => {
     expect(screen.getByText(/not be easily guessable/)).not.toHaveClass('field-hint--warning');
   });
 
+  // Checks that the gating is register-only: an existing user's already-set
+  // password isn't re-judged (and can't accidentally lock them out) at login.
   it('does not gate submit on password strength in login mode', () => {
     renderLoginPage();
-    // Login is the default mode; a weak password is fine here since we're not creating one.
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'demo@example.com' } });
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: '12345678A' } });
 

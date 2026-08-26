@@ -13,6 +13,7 @@ const playbook: Playbook = {
 
 // Verifies playbook details are rendered and deletion is triggered with the correct ID.
 describe('PlaybookCard', () => {
+  // Checks that the card actually surfaces the playbook's data to the user.
   it('renders the playbook name, trigger, and actions', () => {
     render(<PlaybookCard playbook={playbook} onDelete={vi.fn()} />);
 
@@ -22,6 +23,7 @@ describe('PlaybookCard', () => {
     expect(screen.getByText('Notify Admin')).toBeInTheDocument();
   });
 
+  // Checks that deletion is wired to the right playbook, not just "some" onDelete call.
   it('calls onDelete with the playbook id when the delete button is clicked', () => {
     const onDelete = vi.fn();
     render(<PlaybookCard playbook={playbook} onDelete={onDelete} />);

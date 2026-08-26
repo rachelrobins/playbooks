@@ -17,6 +17,7 @@ describe('apiRequest', () => {
     vi.useRealTimers();
   });
 
+  // Checks the happy path: a 2xx response's body is parsed and returned as-is.
   it('returns parsed JSON on success', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(fakeResponse(200, { hello: 'world' })));
 
@@ -25,6 +26,7 @@ describe('apiRequest', () => {
     expect(result).toEqual({ hello: 'world' });
   });
 
+  // Checks the 204 short-circuit: no body is parsed (a 204 has none to parse).
   it('returns undefined for 204 responses without parsing a body', async () => {
     const json = vi.fn();
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, status: 204, json }));
@@ -35,6 +37,8 @@ describe('apiRequest', () => {
     expect(json).not.toHaveBeenCalled();
   });
 
+  // Checks that a failed request is converted into the app's single error type,
+  // preserving the server's { error, code } contract rather than raw fetch data.
   it('throws an ApiError carrying the server error and code for non-2xx responses', async () => {
     vi.stubGlobal(
       'fetch',
@@ -48,6 +52,8 @@ describe('apiRequest', () => {
     });
   });
 
+  // Checks that fetch throwing outright (offline, DNS failure, etc.) also becomes
+  // an ApiError instead of an unhandled rejection, so callers only ever catch one type.
   it('wraps a network failure as an ApiError with status 0', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('Failed to fetch')));
 
@@ -57,6 +63,8 @@ describe('apiRequest', () => {
     });
   });
 
+  // Checks the request-timeout guard: a hung server (fetch never resolves) gets
+  // aborted at the configured deadline instead of leaving the caller waiting forever.
   it('aborts and reports a timeout if the server never responds', async () => {
     vi.useFakeTimers();
     vi.stubGlobal(
@@ -79,6 +87,8 @@ describe('apiRequest', () => {
     await assertion;
   });
 
+  // Checks that a rejected token (401 on a request that sent one) notifies
+  // whoever registered the handler, so AuthContext can react by logging out.
   it('triggers the unauthorized handler on a 401 for an authenticated request', async () => {
     vi.stubGlobal(
       'fetch',
@@ -92,8 +102,9 @@ describe('apiRequest', () => {
     expect(onUnauthorized).toHaveBeenCalledTimes(1);
   });
 
+  // Checks the negative case: a 401 with no token attached must not trigger the
+  // handler — e.g. a failed login attempt is a 401 too, but there's no session to invalidate.
   it('does not trigger the unauthorized handler on a 401 for a request without a token', async () => {
-    // e.g. a failed login attempt is a 401 too, but there's no session to invalidate.
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue(fakeResponse(401, { error: 'Invalid email or password', code: 'UNAUTHORIZED' })),
