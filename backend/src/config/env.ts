@@ -15,8 +15,9 @@ export const env = {
   port: Number(process.env.PORT ?? 4000),
   databaseUrl: required('DATABASE_URL', 'file:./dev.db'),
 
-  // Safe for local development only; production must provide a real secret.
-  jwtSecret: required('JWT_SECRET', 'dev-only-secret-do-not-use-in-prod'),
+  // No fallback: a hardcoded secret checked into source would be public and forgeable.
+  // Every environment (dev included) must set its own via .env (see .env.example).
+  jwtSecret: required('JWT_SECRET'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '1d',
   corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
   isTest: process.env.NODE_ENV === 'test',

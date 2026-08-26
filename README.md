@@ -77,9 +77,12 @@ npm run dev                           # starts on http://localhost:4000
 
 You don't need to edit `backend/.env` for local dev — the defaults just work:
 - `DATABASE_URL` points at a local SQLite file that Prisma creates for you.
-- `JWT_SECRET` is a placeholder; fine locally, but replace it with a real
-  random value before deploying anywhere reachable by other people (it's
-  what stops someone from forging login tokens).
+- `JWT_SECRET` ships as a placeholder in `.env.example`, which is fine to use
+  as-is locally — but replace it with a real random value before deploying
+  anywhere reachable by other people (it's what stops someone from forging
+  login tokens). There's no fallback in code: the app refuses to start if
+  `JWT_SECRET` isn't set at all, in any environment, so a deployment can't
+  silently end up using a known/guessable secret.
 - `PORT` / `CORS_ORIGIN` only need changing if `4000` is taken or you run
   the frontend on a port other than `5173`.
 
