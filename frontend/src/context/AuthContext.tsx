@@ -6,6 +6,7 @@ import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import * as authApi from '../api/auth';
 import { AuthUser } from '../types/domain';
 
+// XSS-exposed by design choice; see "JWT stored in localStorage" in README.md's design notes.
 const STORAGE_KEY = 'playblocks.auth';
 
 interface StoredAuth {

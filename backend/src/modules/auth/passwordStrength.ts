@@ -1,3 +1,7 @@
+/**
+ * Provides password strength analysis using zxcvbn and exposes a minimum-strength
+ * check for validating passwords before they are accepted by the application.
+ */
 import { ZxcvbnFactory, ZxcvbnResult } from '@zxcvbn-ts/core';
 import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
 import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en';

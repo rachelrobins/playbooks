@@ -1,6 +1,8 @@
 import { apiRequest } from './client';
 import { Action, Playbook, Trigger } from '../types/domain';
 
+// api requests for managing playbooks (GET, POST, DELETE)
+
 /** Fetches all playbooks belonging to the authenticated user. */
 export function listPlaybooks(token: string) {
   return apiRequest<Playbook[]>('/playbooks', { token });

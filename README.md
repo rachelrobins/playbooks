@@ -141,3 +141,11 @@ port it's actually running on — Vite prints it on startup.
   array type; Prisma's `Json` type isn't supported by the SQLite connector
   either, so the DTO layer (`playbooks.service.ts`) handles the
   serialize/deserialize boundary.
+- **JWT stored in `localStorage`**: convenient for a take-home (no cookie/CSRF
+  plumbing needed), but vulnerable to XSS: any injected script can read
+  `localStorage` and steal the token. If you plan to run this in production,
+  migrate to an HttpOnly cookie so the token is inaccessible to JavaScript.
+- **No repository/adapter layer**: services (e.g. `playbooks.service.ts`) call
+  Prisma directly. Fine at this scale; add a repository/adapter layer if you
+  expect DB changes or more complex queries: it isolates Prisma from domain
+  logic and makes testing easier.
