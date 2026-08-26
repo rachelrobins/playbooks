@@ -6,12 +6,12 @@ export interface AuthResponse {
   user: AuthUser;
 }
 
-/** Sends a registration request and returns the authentication token and user. */
+/** Sends a registration request and returns the authentication token and user (/auth/register) */
 export function register(email: string, password: string) {
   return apiRequest<AuthResponse>('/auth/register', { method: 'POST', body: { email, password } });
 }
 
-/** Sends login credentials and returns the authentication token and user. */
+/** Sends login credentials and returns the authentication token and user (/auth/login) */
 export function login(email: string, password: string) {
   return apiRequest<AuthResponse>('/auth/login', { method: 'POST', body: { email, password } });
 }

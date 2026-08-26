@@ -15,7 +15,7 @@ export async function resetDatabase() {
 
 // Registers a fresh user and returns their auth token + id, so tests that
 // need an authenticated request don't have to repeat the register call.
-export async function registerAndLogin(email = 'user@example.com', password = 'password123') {
+export async function registerAndLogin(email = 'user@example.com', password = 'Tr4ction-Whale!') {
   const response = await request(app).post('/auth/register').send({ email, password });
   return { token: response.body.token as string, userId: response.body.user.id as string };
 }

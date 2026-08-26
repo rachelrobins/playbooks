@@ -10,12 +10,16 @@ body {
 }
 
 .navbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: 0.75rem 1.5rem;
   background: #1f2430;
   color: white;
+}
+
+.navbar__links {
+  justify-self: center;
 }
 
 .navbar__links a {
@@ -32,6 +36,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  justify-self: end;
 }
 
 .page {
@@ -148,6 +153,16 @@ button:disabled {
 
 .action-checkbox-group label.disabled {
   opacity: 0.5;
+}
+
+.field-hint {
+  margin: -0.5rem 0 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.field-hint--warning {
+  color: #9b1c1c;
 }
 
 .error-banner {

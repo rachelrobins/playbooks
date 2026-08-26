@@ -16,7 +16,7 @@ describe('POST /auth/register', () => {
   it('creates a new user and returns a token', async () => {
     const response = await request(app)
       .post('/auth/register')
-      .send({ email: 'new@example.com', password: 'password123' });
+      .send({ email: 'new@example.com', password: 'Tr4ction-Whale!' });
 
     expect(response.status).toBe(201);
     expect(response.body.token).toEqual(expect.any(String));
@@ -24,11 +24,11 @@ describe('POST /auth/register', () => {
   });
 
   it('rejects duplicate emails', async () => {
-    await request(app).post('/auth/register').send({ email: 'dup@example.com', password: 'password123' });
+    await request(app).post('/auth/register').send({ email: 'dup@example.com', password: 'Tr4ction-Whale!' });
 
     const response = await request(app)
       .post('/auth/register')
-      .send({ email: 'dup@example.com', password: 'password123' });
+      .send({ email: 'dup@example.com', password: 'Tr4ction-Whale!' });
 
     expect(response.status).toBe(409);
   });
@@ -40,22 +40,30 @@ describe('POST /auth/register', () => {
 
     expect(response.status).toBe(400);
   });
+
+  it('rejects weak but well-formed passwords', async () => {
+    const response = await request(app)
+      .post('/auth/register')
+      .send({ email: 'weak@example.com', password: '12345678A' });
+
+    expect(response.status).toBe(400);
+  });
 });
 
 describe('POST /auth/login', () => {
   it('logs in with correct credentials', async () => {
-    await request(app).post('/auth/register').send({ email: 'login@example.com', password: 'password123' });
+    await request(app).post('/auth/register').send({ email: 'login@example.com', password: 'Tr4ction-Whale!' });
 
     const response = await request(app)
       .post('/auth/login')
-      .send({ email: 'login@example.com', password: 'password123' });
+      .send({ email: 'login@example.com', password: 'Tr4ction-Whale!' });
 
     expect(response.status).toBe(200);
     expect(response.body.token).toEqual(expect.any(String));
   });
 
   it('rejects an incorrect password', async () => {
-    await request(app).post('/auth/register').send({ email: 'login2@example.com', password: 'password123' });
+    await request(app).post('/auth/register').send({ email: 'login2@example.com', password: 'Tr4ction-Whale!' });
 
     const response = await request(app)
       .post('/auth/login')
@@ -67,7 +75,7 @@ describe('POST /auth/login', () => {
   it('rejects an unknown email', async () => {
     const response = await request(app)
       .post('/auth/login')
-      .send({ email: 'ghost@example.com', password: 'password123' });
+      .send({ email: 'ghost@example.com', password: 'Tr4ction-Whale!' });
 
     expect(response.status).toBe(401);
   });

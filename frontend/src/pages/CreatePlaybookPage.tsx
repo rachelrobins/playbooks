@@ -9,8 +9,6 @@ import { PlaybookCard } from '../components/PlaybookCard';
 import { TriggerSelect } from '../components/TriggerSelect';
 import { ActionCheckboxGroup } from '../components/ActionCheckboxGroup';
 
-const MAX_ACTIONS = 3;
-
 /** Renders the page for creating a new playbook. */
 export function CreatePlaybookPage() {
   const { token } = useAuth();
@@ -18,6 +16,7 @@ export function CreatePlaybookPage() {
   const [triggers, setTriggers] = useState<Trigger[]>([]);
   const [availableActions, setAvailableActions] = useState<Action[]>([]);
   const [playbooks, setPlaybooks] = useState<Playbook[]>([]);
+  const [maxActions, setMaxActions] = useState(3);
 
   const [name, setName] = useState('');
   const [trigger, setTrigger] = useState<Trigger | ''>('');
@@ -36,6 +35,7 @@ export function CreatePlaybookPage() {
         const [meta, existing] = await Promise.all([metaApi.getMeta(), playbooksApi.listPlaybooks(token!)]);
         setTriggers(meta.triggers);
         setAvailableActions(meta.actions);
+        setMaxActions(meta.maxActions);
         setPlaybooks(existing);
       } catch (err) {
         setError(err instanceof ApiError ? err.message : 'Failed to load playbooks.');
@@ -102,11 +102,11 @@ export function CreatePlaybookPage() {
           </label>
 
           <fieldset>
-            <legend>Actions (choose 1–{MAX_ACTIONS})</legend>
+            <legend>Actions (choose 1–{maxActions})</legend>
             <ActionCheckboxGroup
               actions={availableActions}
               selected={actions}
-              maxSelected={MAX_ACTIONS}
+              maxSelected={maxActions}
               onChange={setActions}
             />
           </fieldset>
