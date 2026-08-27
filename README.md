@@ -3,7 +3,7 @@
 A minimal web app for creating and simulating security automation playbooks.
 Users register/log in, build playbooks (a trigger + 1–3 actions), and simulate
 a security event to see which of their playbooks would fire and what actions
-would run.
+would run. For simplicity this is mono-repo with be and fe, in prod we would implement services in larger scale with separate repos.
 
 ## Architecture
 
