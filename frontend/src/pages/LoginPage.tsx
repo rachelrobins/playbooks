@@ -1,3 +1,7 @@
+/**
+ * Renders the login and registration page.
+ * Handles authentication and enforces password-strength requirements during registration.
+ */
 import { FormEvent, useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';

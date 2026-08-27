@@ -1,3 +1,7 @@
+/**
+ * Centralizes API error handling by converting application and validation errors
+ * into consistent HTTP responses and safely handling unexpected errors.
+ */
 import { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import { AppError } from '../common/AppError';

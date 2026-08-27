@@ -1,3 +1,7 @@
+/**
+ * Provides authentication middleware for protected routes by validating JWTs
+ * and attaching the authenticated user's identity to the request.
+ */
 import { NextFunction, Request, Response } from 'express';
 import { UnauthorizedError } from '../common/AppError';
 import { verifyToken } from '../modules/auth/jwt';

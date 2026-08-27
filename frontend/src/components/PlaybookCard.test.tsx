@@ -1,3 +1,7 @@
+/**
+ * Tests the PlaybookCard component.
+ * Verifies playbook details are rendered and deletion uses the correct ID.
+ */
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { PlaybookCard } from './PlaybookCard';

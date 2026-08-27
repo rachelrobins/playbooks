@@ -1,3 +1,7 @@
+/**
+ * Defines the validation schema for creating playbooks and derives the
+ * corresponding TypeScript input type from the schema.
+ */
 import { z } from 'zod';
 import { ACTIONS, MAX_ACTIONS, MIN_ACTIONS, TRIGGERS } from '../../common/domain';
 

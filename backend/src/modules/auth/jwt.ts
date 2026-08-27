@@ -1,3 +1,7 @@
+/**
+ * Provides JWT creation and verification for authenticating users and preserving
+ * their identity across requests.
+ */
 import jwt from 'jsonwebtoken';
 import { env } from '../../config/env';
 

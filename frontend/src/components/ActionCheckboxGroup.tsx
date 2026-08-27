@@ -1,3 +1,7 @@
+/**
+ * Renders a group of action checkboxes for selecting playbook actions.
+ * Enforces the maximum number of actions that can be selected.
+ */
 import { Action } from '../types/domain';
 
 interface ActionCheckboxGroupProps {

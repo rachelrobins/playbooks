@@ -1,3 +1,7 @@
+/**
+ * Tests the AuthContext.
+ * Verifies session persistence and automatic logout when an authenticated request returns 401.
+ */
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AuthProvider, useAuth } from './AuthContext';
@@ -11,7 +15,7 @@ function TestConsumer() {
   return (
     <div>
       <span data-testid="token">{token ?? 'none'}</span>
-      <button onClick={() => apiRequest('/playbooks', { token }).catch(() => {})}>Make authenticated call</button>
+      <button onClick={() => apiRequest('/playbooks', { token }).catch(() => { })}>Make authenticated call</button>
     </div>
   );
 }

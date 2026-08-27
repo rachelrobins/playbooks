@@ -1,3 +1,7 @@
+/**
+ * Provides API functions for managing the authenticated user's playbooks.
+ * Supports listing, creating, and deleting playbooks.
+ */
 import { apiRequest } from './client';
 import { Action, Playbook, Trigger } from '../types/domain';
 

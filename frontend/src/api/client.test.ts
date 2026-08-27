@@ -1,3 +1,8 @@
+/**
+ * Tests the shared API client.
+ * Verifies successful requests, errors, network failures, timeouts,
+ * and unauthorized responses.
+ */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { apiRequest, ApiError, setUnauthorizedHandler } from './client';
 

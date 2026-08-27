@@ -5,6 +5,7 @@ import request from 'supertest';
 import { errorHandler } from '../src/middleware/errorHandler';
 import { requestTimeoutMiddleware } from '../src/middleware/requestTimeout';
 
+// Helper function to build a small Express app with the requestTimeoutMiddleware and a single route.
 function buildApp(timeoutMs: number, handler: express.RequestHandler) {
   const app = express();
   app.use(requestTimeoutMiddleware(timeoutMs));

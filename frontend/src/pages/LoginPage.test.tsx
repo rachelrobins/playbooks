@@ -1,3 +1,7 @@
+/**
+ * Tests password-strength validation on the login and registration page.
+ * Verifies weak passwords are rejected during registration while login remains unrestricted.
+ */
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';

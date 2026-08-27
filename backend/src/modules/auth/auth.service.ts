@@ -1,3 +1,7 @@
+/**
+ * Implements user registration and login, including password hashing, credential
+ * verification, and JWT generation.
+ */
 import bcrypt from 'bcryptjs';
 import { prisma } from '../../config/prisma';
 import { ConflictError, UnauthorizedError } from '../../common/AppError';
@@ -11,6 +15,7 @@ export interface AuthResult {
   user: { id: string; email: string };
 }
 
+// Registers a new user account with the provided credentials.
 export async function register(input: RegisterInput): Promise<AuthResult> {
   const existing = await prisma.user.findUnique({ where: { email: input.email } });
   if (existing) {
@@ -28,6 +33,7 @@ export async function register(input: RegisterInput): Promise<AuthResult> {
   return { token, user: { id: user.id, email: user.email } };
 }
 
+// Authenticates a user with the provided credentials.
 export async function login(input: LoginInput): Promise<AuthResult> {
   const user = await prisma.user.findUnique({ where: { email: input.email } });
   if (!user) {

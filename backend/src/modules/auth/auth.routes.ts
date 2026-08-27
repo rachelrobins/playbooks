@@ -1,3 +1,6 @@
+/**
+ * Defines authentication API routes for user registration and login.
+ */
 import { Router } from 'express';
 import { asyncHandler } from '../../common/asyncHandler';
 import { loginHandler, registerHandler } from './auth.controller';

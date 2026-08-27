@@ -1,3 +1,6 @@
+/**
+ * Renders a dropdown for selecting a trigger from the available options.
+ */
 import { Trigger } from '../types/domain';
 
 interface TriggerSelectProps {

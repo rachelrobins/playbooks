@@ -1,3 +1,7 @@
+/**
+ * Provides API functions for user authentication.
+ * Handles registration and login requests through the API client.
+ */
 import { apiRequest } from './client';
 import { AuthUser } from '../types/domain';
 

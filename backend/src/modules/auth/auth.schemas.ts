@@ -1,6 +1,11 @@
+/**
+ * Defines Zod schemas for validating registration and login requests, including
+ * password strength requirements during registration.
+ */
 import { z } from 'zod';
 import { isPasswordStrongEnough } from './passwordStrength';
 
+/** Validates registration data, including minimum password strength requirements. */
 export const registerSchema = z
   .object({
     email: z.string().email('A valid email is required'),
@@ -15,6 +20,7 @@ export const registerSchema = z
     path: ['password'],
   });
 
+/** Validates the credentials required to log in. */
 export const loginSchema = z.object({
   email: z.string().email('A valid email is required'),
   password: z.string().min(1, 'Password is required'),

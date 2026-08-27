@@ -1,3 +1,6 @@
+/**
+ * Renders a password input field with a control to show or hide the password.
+ */
 import { InputHTMLAttributes, useState } from 'react';
 
 type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>;

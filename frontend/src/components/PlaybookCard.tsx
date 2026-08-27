@@ -1,3 +1,6 @@
+/**
+ * Displays a playbook's details and provides an option to delete it.
+ */
 import { Playbook } from '../types/domain';
 
 interface PlaybookCardProps {

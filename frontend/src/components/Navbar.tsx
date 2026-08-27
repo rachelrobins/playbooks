@@ -1,3 +1,7 @@
+/**
+ * Renders the application's navigation bar.
+ * Displays navigation links and the authenticated user's information.
+ */
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 

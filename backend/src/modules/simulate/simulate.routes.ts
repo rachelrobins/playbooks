@@ -1,3 +1,7 @@
+/**
+ * Defines the routes for trigger simulation.
+ * All routes require authentication before reaching the controller.
+ */
 import { Router } from 'express';
 import { asyncHandler } from '../../common/asyncHandler';
 import { authGuard } from '../../middleware/authGuard';

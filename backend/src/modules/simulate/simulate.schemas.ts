@@ -1,3 +1,7 @@
+/**
+ * Defines the schema for validating trigger simulation requests
+ * and derives the corresponding TypeScript input type.
+ */
 import { z } from 'zod';
 import { TRIGGERS } from '../../common/domain';
 

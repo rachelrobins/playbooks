@@ -1,3 +1,7 @@
+/**
+ * Creates and configures the Express application.
+ * Sets up middleware, API routes, health checks, and error handling.
+ */
 import cors from 'cors';
 import express from 'express';
 import { env } from './config/env';
@@ -8,6 +12,7 @@ import { metaRouter } from './modules/meta/meta.routes';
 import { playbooksRouter } from './modules/playbooks/playbooks.routes';
 import { simulateRouter } from './modules/simulate/simulate.routes';
 
+// Creates and configures the Express application.
 export function createApp() {
   const app = express();
 

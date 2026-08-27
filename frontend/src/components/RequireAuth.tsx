@@ -1,3 +1,6 @@
+/**
+ * Protects routes by redirecting unauthenticated users to the login page.
+ */
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 

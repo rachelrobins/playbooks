@@ -1,3 +1,7 @@
+/**
+ * Application entry point.
+ * Creates the Express application and starts the HTTP server.
+ */
 import { createApp } from './app';
 import { env } from './config/env';
 

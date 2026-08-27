@@ -1,3 +1,7 @@
+/**
+ * Tests the ActionCheckboxGroup component.
+ * Verifies action selection, removal, and maximum selection behavior.
+ */
 import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { ActionCheckboxGroup } from './ActionCheckboxGroup';

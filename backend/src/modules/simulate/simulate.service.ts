@@ -1,3 +1,7 @@
+/**
+ * Provides the business logic for trigger simulation.
+ * Finds the user's playbooks that match the given trigger.
+ */
 import { Action, Trigger } from '../../common/domain';
 import * as playbooksService from '../playbooks/playbooks.service';
 

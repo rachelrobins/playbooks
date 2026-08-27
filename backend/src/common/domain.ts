@@ -1,3 +1,8 @@
+/**
+ * Defines the supported playbook triggers and actions, along with the allowed
+ * range of actions that can be selected for a playbook.
+ */
+
 export const TRIGGERS = ['Malware Detected', 'Login Attempt', 'Phishing Alert'] as const;
 export const ACTIONS = ['Isolate Host', 'Notify Admin', 'Block IP'] as const;
 

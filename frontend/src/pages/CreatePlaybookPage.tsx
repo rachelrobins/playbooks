@@ -1,3 +1,7 @@
+/**
+ * Renders the page for creating, displaying, and deleting playbooks.
+ * Loads available triggers and actions from the API and manages the form state.
+ */
 import { FormEvent, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { ApiError } from '../api/client';

@@ -1,3 +1,7 @@
+/**
+ * Defines an endpoint that exposes the available playbook triggers, actions,
+ * and action selection limits to the frontend.
+ */
 import { Router } from 'express';
 import { ACTIONS, MAX_ACTIONS, MIN_ACTIONS, TRIGGERS } from '../../common/domain';
 

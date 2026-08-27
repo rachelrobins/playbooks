@@ -1,3 +1,7 @@
+/**
+ * Provides API functions for fetching application metadata,
+ * including the available triggers and actions.
+ */
 import { apiRequest } from './client';
 import { Action, Trigger } from '../types/domain';
 

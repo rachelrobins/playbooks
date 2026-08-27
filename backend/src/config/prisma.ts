@@ -1,3 +1,7 @@
+/**
+ * Configures and exports the Prisma database client, including a timeout for
+ * SQLite write contention to avoid immediate SQLITE_BUSY failures.
+ */
 import { PrismaClient } from '@prisma/client';
 import { env } from './env';
 

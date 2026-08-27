@@ -1,3 +1,8 @@
+/**
+ * Shared HTTP client for communicating with the backend API.
+ * Handles authentication, request timeouts, response parsing, and API errors.
+ */
+
 // Uses the configured API URL, falling back to the local backend during development.
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
 
@@ -40,6 +45,8 @@ interface RequestOptions {
   token?: string | null;
 }
 
+// Sends an HTTP request to the backend API, returning the parsed JSON response.
+// Throws an ApiError for any non-2xx response, including network failures and timeouts.
 export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = 'GET', body, token } = options;
 

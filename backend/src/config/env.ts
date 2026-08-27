@@ -1,3 +1,7 @@
+/**
+ * Loads and validates environment variables used to configure the backend,
+ * including database, authentication, CORS, and request timeout settings.
+ */
 import dotenv from 'dotenv';
 
 dotenv.config();

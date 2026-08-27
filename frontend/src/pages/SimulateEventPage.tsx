@@ -1,3 +1,7 @@
+/**
+ * Renders the page for simulating security event triggers.
+ * Loads available triggers and displays the playbooks that would be triggered.
+ */
 import { FormEvent, useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { ApiError } from '../api/client';
